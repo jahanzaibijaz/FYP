@@ -46,8 +46,6 @@ public class RequestedBooks extends Activity {
     }
 
 
-
-
     private void DeleteBookMethod() {
 
         String Deletebook=id.toString().toString();

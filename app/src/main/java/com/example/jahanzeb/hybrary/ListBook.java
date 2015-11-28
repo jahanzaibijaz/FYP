@@ -132,8 +132,6 @@ public class ListBook extends Activity {
                     HttpTransportSE androidHttpTransport = new HttpTransportSE(MainActivity.URL);
 
                     //send Request
-                    Log.e("ListBook", "id  is"+bookId);
-                    Log.e("ListBook", "request for android http transport call::" + deleteBookEnvelop);
                     androidHttpTransport.call(MainActivity.SOAP_ACTION + "DeleteOwnBook", deleteBookEnvelop);
                     Log.e("ListBook", " android http transport call done::" + deleteBookEnvelop);
 
