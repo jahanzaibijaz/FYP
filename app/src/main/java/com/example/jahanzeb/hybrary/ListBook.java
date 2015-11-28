@@ -42,28 +42,20 @@ public class ListBook extends Activity {
 
         initializeVariables();
 
+        // single click
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-
             public void onItemClick(AdapterView<?> parent, View view, final int position, long lid) {
-                bookId = Integer.parseInt(id.get(position));
 
-                new AlertDialog.Builder(ListBook.this)
-                        .setTitle("DeleteBook")
-                        .setMessage("Are you sure You want Delete'" + book.get(position) + " From Database")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                DeleteRequest.start();
-                            }
-                        })
-                        .setNegativeButton("No",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
+            }
+        });
 
-                                    }
-                                })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setCancelable(true).show();
+        //Long click
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                deleteBook(position);
+                return true;
             }
         });
     }
@@ -190,6 +182,26 @@ public class ListBook extends Activity {
 
         adapter = new SingleBookAdapter(this, book, author, edition);
         list.setAdapter(adapter);
+    }
+
+    private void deleteBook(int position) {
+        bookId = Integer.parseInt(id.get(position));
+        new AlertDialog.Builder(ListBook.this)
+                .setTitle("DeleteBook")
+                .setMessage("Are you sure You want Delete'" + book.get(position) + " From Database")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        DeleteRequest.start();
+                    }
+                })
+                .setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setCancelable(true).show();
     }
 
 }
