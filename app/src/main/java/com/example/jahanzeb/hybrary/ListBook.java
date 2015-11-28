@@ -1,13 +1,9 @@
 package com.example.jahanzeb.hybrary;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,11 +25,11 @@ public class ListBook extends Activity {
             soapPrimitiveResponse,
             SOAP_ACTION_METHOD = MainActivity.SOAP_ACTION + methodName;
 
-    private Thread getOwnersBooks,DeleteRequest;
+    private Thread getOwnersBooks;
     ListView list;
     ArrayList<String> id,book,author,edition;
     SingleBookAdapter adapter;
-    public  int bookId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,23 +37,6 @@ public class ListBook extends Activity {
         setContentView(R.layout.list_book);
 
         initializeVariables();
-
-        // single click
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long lid) {
-
-            }
-        });
-
-        //Long click
-        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                deleteBook(position);
-                return true;
-            }
-        });
     }
 
     private void initializeVariables() {
@@ -112,54 +91,6 @@ public class ListBook extends Activity {
 
             }
         };
-        DeleteRequest = new Thread(){
-            public void run(){
-                try{
-                    // create Soap Request to hit Database Query for user details
-                    SoapObject request = new SoapObject(MainActivity.nameSpace, "DeleteOwnBook");
-
-                    //info for borrower table_id
-                    PropertyInfo table_id = new PropertyInfo();
-                    table_id.setName("Bookid");
-                    table_id.setValue(bookId);
-                    table_id.setType(int.class);
-                    request.addProperty(table_id);
-
-                    // Serialization for reply from soap request
-                    SoapSerializationEnvelope deleteBookEnvelop = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-                    deleteBookEnvelop.dotNet = true;
-                    deleteBookEnvelop.setOutputSoapObject(request);
-                    HttpTransportSE androidHttpTransport = new HttpTransportSE(MainActivity.URL);
-
-                    //send Request
-                    androidHttpTransport.call(MainActivity.SOAP_ACTION + "DeleteOwnBook", deleteBookEnvelop);
-                    Log.e("ListBook", " android http transport call done::" + deleteBookEnvelop);
-
-                    final SoapPrimitive response = (SoapPrimitive)deleteBookEnvelop.getResponse();
-                    Log.e("ListBook","response reached till soap primitive::");
-                    soapPrimitiveResponse = response.toString();
-
-                    hnd.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (soapPrimitiveResponse=="1" || soapPrimitiveResponse=="2" )
-                            {
-                                Log.e("ListBook", "Book Deleted"+soapPrimitiveResponse);
-                            }
-                            else
-
-                                Log.e("ListBook", "Response   Got From WebService: : " + soapPrimitiveResponse );
-                            finish();
-                        }
-                    });
-                } catch(Exception e){
-                    Log.w("ListBook","setThreadAction request EXCEPTION !!"+e);
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "You are not connected to Internet", Toast.LENGTH_LONG).show();
-                }
-            }
-        };
-
     }
 
     private void populateArrayLists() {
@@ -184,23 +115,4 @@ public class ListBook extends Activity {
         list.setAdapter(adapter);
     }
 
-    private void deleteBook(int position) {
-        bookId = Integer.parseInt(id.get(position));
-        new AlertDialog.Builder(ListBook.this)
-                .setTitle("DeleteBook")
-                .setMessage("Are you sure You want Delete'" + book.get(position) + " From Database")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        DeleteRequest.start();
-                    }
-                })
-                .setNegativeButton("No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        })
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setCancelable(true).show();
-    }
 }
