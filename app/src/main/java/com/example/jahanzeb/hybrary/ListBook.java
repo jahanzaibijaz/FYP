@@ -203,6 +203,4 @@ public class ListBook extends Activity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setCancelable(true).show();
     }
-
 }
-

@@ -20,63 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight=".17"/>
-  <!--  <TextView android:text="BookName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="86dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:ems="10"
-        android:paddingLeft="50dp"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AddBook"
-        android:id="@+id/btn_addbook"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/shwbooks"
-        android:layout_alignStart="@+id/shwbooks"
-        android:layout_alignRight="@+id/shwbooks"
-        android:layout_alignEnd="@+id/shwbooks" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/textView2"
-        android:layout_marginTop="75dp"
-        android:layout_below="@+id/btn_addbook"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="ShowBooks"
-    android:id="@+id/shwbooks"
-        android:layout_gravity="center"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_centerHorizontal="true" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:ems="10"
-        android:id="@+id/usernameview"
-
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />-->
 
 
 </LinearLayout>
