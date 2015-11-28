@@ -21,18 +21,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Signup" ></activity>
-        <activity android:name=".Dashboard" ></activity>
-        <activity android:name=".ShowBooks" ></activity>
-        <activity android:name=".SearchBook" ></activity>
-        <activity android:name=".ListBook" ></activity>
         <activity android:name=".AddBook" ></activity>
-        <activity android:name=".RequestBook"></activity>
-        <activity android:name=".RequestedBooks"></activity>
-        <activity android:name=".UpdateBook"></activity>
+        <activity android:name=".Dashboard" ></activity>
         <activity android:name=".DeleteBook"></activity>
         <activity android:name=".LendBook"></activity>
+        <activity android:name=".ListBook" ></activity>
+        <activity android:name=".RequestBook"></activity>
+        <activity android:name=".RequestedBooks"></activity>
+        <activity android:name=".SearchBook" ></activity>
+        <activity android:name=".ShowBooks" ></activity>
+        <activity android:name=".Signup" ></activity>
+        <activity android:name=".UpdateBook"></activity>
         <activity android:name=".UpdateSingleBook"></activity>
+
     </application>
 
 </manifest>
