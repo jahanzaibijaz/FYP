@@ -15,12 +15,7 @@ import android.widget.Toast;
 
 public class Dashboard extends Activity {
 
-    //Button b1;
-    // EditText ET,ET2,ET3;
-    //TextView TV,usrname;
 
-    // Thread thh ;
-    //String p1, p2 ,p3,p4,p5,p6;
     GridView grid;
     String[] menu = {
             "   Add Book",
@@ -39,10 +34,7 @@ public class Dashboard extends Activity {
             R.drawable.list_book
     };
 
-    /*private static final String NameSpace3 = "http://tempuri.org/";
-    public static final String URL3 = "http://10.0.3.2:63232/WebSite4/WebService.asmx";
-    private static final String MethodName3 = "AddBook";
-    private static final String SOAP_ACTION3 = "http://tempuri.org/AddBook";*/
+
 
 
     @Override
@@ -51,16 +43,9 @@ public class Dashboard extends Activity {
         setContentView(R.layout.activity_dashboard);
 
 
-        // usrname.setText(getIntent().getExtras().getString("username"));
-        // Intent intnt= getIntent();
-        // String extra=intnt.getExtras("username",);
+
         grid = (GridView) findViewById(R.id.gridView1);
-        // b1= (Button)findViewById(R.id.btn_addbook);
-        // ET=(EditText) findViewById(R.id.editText);
-        // ET2=(EditText) findViewById(R.id.author);
-        // ET2=(EditText) findViewById(R.id.edition);
-        // TV=(TextView) findViewById(R.id.textView);
-        // usrname=(TextView)findViewById(R.id.usernameview);
+
         grid.setAdapter(new AdaptImages(this));
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

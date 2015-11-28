@@ -2,9 +2,12 @@ package com.example.jahanzeb.hybrary;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,14 +35,26 @@ public class UpdateBook extends Activity {
     ArrayList<String> id,book,author,edition;
     SingleBookAdapter adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_book);
 
         initializeVariables();
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long lid) {
 
-
+                Intent intnt=  new Intent(getApplicationContext(),UpdateSingleBook.class);
+                intnt.putExtra("bookId",id.get(position));
+                intnt.putExtra("bookName",book.get(position));
+                intnt.putExtra("author",author.get(position));
+                intnt.putExtra("edition",edition.get(position));
+                startActivity(intnt);
+                finish();
+            }
+        });
     }
     private void initializeVariables() {
         setThreadAction();
