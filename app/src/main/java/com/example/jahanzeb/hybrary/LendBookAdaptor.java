@@ -6,50 +6,50 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 /**
- * Created by jahanzeb on 11/15/2015.
+ * Created by jahanzeb on 05/12/2015.
  */
-public class SingleBookAdapter extends ArrayAdapter<String> {
+public class LendBookAdaptor extends ArrayAdapter <String> {
+    private Activity mee;
+    private ArrayList<String>
+            book,
+            author,
+            edition,
+            Borrowername;
+    public LendBookAdaptor  (Activity context, ArrayList<String> resource1, ArrayList<String> resource2, ArrayList<String> resource3,ArrayList<String> resource4) {
+        super(context, R.layout.lendbookinfo, resource1);
 
-        // Activity for inflator
-        private Activity me;
-
-        // Array Lists for list population
-        private ArrayList<String>
-        book,
-        author,
-        edition;
-
-
-    public SingleBookAdapter(Activity context, ArrayList<String> resource1, ArrayList<String> resource2, ArrayList<String> resource3) {
-        super(context, R.layout.single_book ,resource1);
-
-        me = context;
+        mee = context;
         book = resource1;
         author = resource2;
         edition = resource3;
-
+        Borrowername = resource4;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // getting INFLATOR from Activity Context (Where thi adapter is called from)
-        LayoutInflater inflator = me.getLayoutInflater();
+        LayoutInflater inflator = mee.getLayoutInflater();
         // create single row for the list
-        View rowView = inflator.inflate(R.layout.single_book, null, false);
+        View rowView = inflator.inflate(R.layout.lendbookinfo, null, false);
 
         // setting the UI for each row
         TextView
                 bookName = (TextView)rowView.findViewById(R.id.bookName),
                 authorName = (TextView)rowView.findViewById(R.id.authorName),
-                editionNumber = (TextView)rowView.findViewById(R.id.edition);
+                editionNumber = (TextView)rowView.findViewById(R.id.edition),
+                Borrwrnme=(TextView)rowView.findViewById(R.id.borrower);
+
         bookName.setText(book.get(position));
         authorName.setText(author.get(position));
         editionNumber.setText(edition.get(position));
+        Borrwrnme.setText(Borrowername.get(position));
 
         // return this row
         return rowView;
     }
+
 }

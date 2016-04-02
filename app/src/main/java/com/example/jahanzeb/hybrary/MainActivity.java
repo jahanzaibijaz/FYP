@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 
     public static final String
             nameSpace = "http://tempuri.org/",                         // Web Service Name
-            URL = "http://10.0.3.2:63232/WebSite4/WebService.asmx",    // Web Service URL
+            URL = "http://10.0.3.2:53611/WebService1.asmx",            // Web Service URL
             SOAP_ACTION = "http://tempuri.org/";                       // Method URL
 
     private String
@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
             SOAP_ACTION_METHOD = SOAP_ACTION + methodName;
 
     public static int userId;
-    private int responseValue;              // response from Soap Action
+    private int responseValue;        // response from Soap Action
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,14 +97,14 @@ public class MainActivity extends Activity {
 
                 // Property Info for user name
                 PropertyInfo userDetails = new PropertyInfo();
-                userDetails.setName("usr");                         // TODO change parameter from usr to userName in Visual Studio
+                userDetails.setName("username");                         // TODO change parameter from usr to userName in Visual Studio
                 userDetails.setValue(userName.getText().toString());
                 userDetails.setType(String.class);
                 request.addProperty(userDetails);
 
                 // Property Info for password
                 PropertyInfo passwordDetail = new PropertyInfo();
-                passwordDetail.setName("pass");                     // TODO change parameter from pass to password in Visual Studio
+                passwordDetail.setName("password");                     // TODO change parameter from pass to password in Visual Studio
                 passwordDetail.setValue(password.getText().toString());
                 passwordDetail.setType(String.class);
                 request.addProperty(passwordDetail);
@@ -113,10 +113,14 @@ public class MainActivity extends Activity {
                 SoapSerializationEnvelope envelop = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                 envelop.dotNet = true;
                 envelop.setOutputSoapObject(request);
-                HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
-                Log.e("MainActivity","soapaction issue"+androidHttpTransport);
+                    HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
+                Log.e("MainActivity", "soapaction issue" + androidHttpTransport);
                 androidHttpTransport.call(SOAP_ACTION_METHOD, envelop);
+
                 final SoapPrimitive response = (SoapPrimitive)envelop.getResponse();
+
+                Log.e("MainActivity","Response is......"+ response);
+
                 responseValue = Integer.parseInt(response.toString());
 
                 hnd.post(new Runnable() {

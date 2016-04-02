@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 public class Dashboard extends Activity {
 
-
     GridView grid;
     String[] menu = {
             "   Add Book",
@@ -34,15 +33,10 @@ public class Dashboard extends Activity {
             R.drawable.list_book
     };
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
-
 
         grid = (GridView) findViewById(R.id.gridView1);
 
@@ -75,7 +69,6 @@ public class Dashboard extends Activity {
                     case 5:
                         i = new Intent(Dashboard.this, ListBook.class);
                         break;
-
 
                         default:
                         i = null;

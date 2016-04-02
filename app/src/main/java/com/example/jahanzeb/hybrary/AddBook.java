@@ -3,6 +3,7 @@ package com.example.jahanzeb.hybrary;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -55,10 +56,14 @@ public class AddBook extends Activity {
     }
 
     private void setThreadAction() {
-        final Handler hnd = new Handler();
+
+
+        final Handler hnd = new Handler(Looper.getMainLooper());
+
         addMyBook = new Thread(){
             public void run(){
                 try{
+                    Looper.prepare();
 
                     // create Soap Request to hit Database Query for user details
                     SoapObject request = new SoapObject(MainActivity.nameSpace, methodName);
@@ -106,6 +111,8 @@ public class AddBook extends Activity {
                         public void run() {
 
                             populateArrayLists();
+                            Log.e("AddBook","BookAddMethod"+soapPrimitiveResponse);
+
                         }
                     });
                 } catch(Exception e){
@@ -117,7 +124,6 @@ public class AddBook extends Activity {
             }
         };
     }
-
     private void populateArrayLists() {
         Log.e("AddBook","Response: "+soapPrimitiveResponse);
     }

@@ -28,15 +28,15 @@ import java.util.ArrayList;
 public class LendBook extends Activity {
 
     private String
-            methodName = "myRequestedBooks",
+            methodName = "BorrowerRequest",
             soapPrimitiveResponse,
             reply="Deny",
             SOAP_ACTION_METHOD = MainActivity.SOAP_ACTION + methodName;
 
-    private Thread getOwnersBooks,sendRequest;
+    private Thread getOwnersBooks,sendRequest,acceptRequest;
     ListView list;
-    ArrayList<String> book,author,edition,requestId,response;
-    SingleBookAdapter adapter;
+    ArrayList<String> book,author,edition,requestId,response,BorrowerName;
+    LendBookAdaptor adapter;
     private int response_id;
 
     @Override
@@ -70,10 +70,8 @@ public class LendBook extends Activity {
                 .setMessage("Hybrary has requested to lend '" + book.get(position) + "' from your collection.")
                 .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        response_id=  Integer.parseInt(requestId.get(position));
-                        reply = "Accept";
-                        response.set(position,reply);
-                        sendRequest.start();
+                       response_id=  Integer.parseInt(requestId.get(position));
+                        acceptRequest.start();
                     }
                 })
                 .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
@@ -110,6 +108,7 @@ public class LendBook extends Activity {
         edition = new ArrayList();
         requestId = new ArrayList();
         response = new ArrayList();
+        BorrowerName=new ArrayList();
         list = (ListView)findViewById(R.id.bookList);
     }
 
@@ -201,6 +200,52 @@ public class LendBook extends Activity {
 
             }
         };
+        acceptRequest=  new Thread()
+        {
+            public void run(){
+                try{
+
+                    // create Soap Request to hit Database Query for user details
+                    SoapObject request = new SoapObject(MainActivity.nameSpace, "RequestAccept");
+
+                    // Property Info for request Id
+                    PropertyInfo requestId = new PropertyInfo();
+                    requestId.setName("USERID");
+                    requestId.setValue(MainActivity.userId);
+                    requestId.setType(int.class);
+                    request.addProperty(requestId);
+
+                    // Property Info for User Id
+                    PropertyInfo status = new PropertyInfo();
+                    status.setName("TABLEID");
+                    status.setValue(response_id);
+                    status.setType(int.class);
+                    request.addProperty(status);
+
+                    // Serialization for reply from soap request
+                    SoapSerializationEnvelope envelop = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                    envelop.dotNet = true;
+                    envelop.setOutputSoapObject(request);
+                    HttpTransportSE androidHttpTransport = new HttpTransportSE(MainActivity.URL);
+
+                    androidHttpTransport.call(MainActivity.SOAP_ACTION+"RequestAccept", envelop);
+                    final SoapPrimitive response = (SoapPrimitive)envelop.getResponse();
+                    soapPrimitiveResponse = response.toString();
+
+                    hnd.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    });
+                } catch(Exception e){
+                    Log.w("LendBook","setThreadAction EXCEPTION !!");
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "You are not connected to Internet", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        };
 
     }
 
@@ -216,14 +261,14 @@ public class LendBook extends Activity {
                 edition.add(json.getString("edition"));
                 requestId.add(json.getString("requestId"));
                 response.add(json.getString("status"));
+                BorrowerName.add(json.getString("BorrowerName"));
             }
         } catch (Exception e) {
             // TODO: handle exception
             Log.e("LendBook","populateArrayList EXCEPTION !!");
             e.printStackTrace();
         }
-
-        adapter = new SingleBookAdapter(this, book, author, edition);
+        adapter = new LendBookAdaptor(this, book, author, edition,BorrowerName);
         list.setAdapter(adapter);
     }
 
