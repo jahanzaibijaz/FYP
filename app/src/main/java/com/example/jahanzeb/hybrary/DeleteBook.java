@@ -22,9 +22,6 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import java.util.ArrayList;
 
-/**
- * Created by jahanzeb on 11/14/2015.
- */
 public class DeleteBook extends Activity {
     private String
             methodName = "filltable",
@@ -43,6 +40,7 @@ public class DeleteBook extends Activity {
         setContentView(R.layout.list_book);
 
         initializeVariables();
+
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -134,7 +132,7 @@ public class DeleteBook extends Activity {
                     hnd.post(new Runnable() {
                         @Override
                         public void run() {
-                            if (soapPrimitiveResponse=="1" || soapPrimitiveResponse=="2" )
+                            if (soapPrimitiveResponse.equals(1)|| soapPrimitiveResponse.equals(2) )
                             {
                                 Log.e("ListBook", "Book Deleted"+soapPrimitiveResponse);
                             }

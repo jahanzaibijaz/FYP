@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +27,7 @@ public class RequestBook extends Activity {
 
     private String
             methodName = "searchBook",
+
             soapPrimitiveResponse,
             SOAP_ACTION_METHOD = MainActivity.SOAP_ACTION;
 
@@ -47,10 +49,16 @@ public class RequestBook extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long lid) {
 
                 new AlertDialog.Builder(RequestBook.this)
-                    .setTitle("Error Message...")
+                    .setTitle("Confirm...")
                     .setMessage("Send request to Hybrary for Borrowing '" + book.get(position) + "'")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
+                            if (requestBook.getThreadGroup() != null)
+                            {
+                                requestBook.getThreadGroup().interrupt();
+
+                            }
+
                             BookID = Integer.parseInt(id.get(position));
                             requestBook.start();
                         }
@@ -74,6 +82,7 @@ public class RequestBook extends Activity {
         book = new ArrayList();
         author = new ArrayList();
         edition = new ArrayList();
+
         list = (ListView)findViewById(R.id.bookList);
     }
 
@@ -129,7 +138,7 @@ public class RequestBook extends Activity {
             requestBook = new Thread(){
             public void run(){
                 try{
-
+                    Looper.prepare();
                     // create Soap Request to hit Database Query for user details
                     SoapObject request = new SoapObject(MainActivity.nameSpace, "sendRequest");
                     
@@ -141,11 +150,12 @@ public class RequestBook extends Activity {
                     request.addProperty(userId);
 
                     // Property Info for Book ID
-                    PropertyInfo book_id = new PropertyInfo();
+                    final PropertyInfo book_id = new PropertyInfo();
                     book_id.setName("bookId");
-                    book_id.setValue( BookID );
+                    book_id.setValue(BookID);
                     book_id.setType(int.class);
                     request.addProperty(book_id);
+                    Log.e("RequestBook", "propertyinfo: " + book_id);
 
                     // Serialization for reply from soap request
                     SoapSerializationEnvelope envelop = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -160,15 +170,23 @@ public class RequestBook extends Activity {
                     hnd.post(new Runnable() {
                         @Override
                         public void run() {
-                            Log.e("RequestBook","Response: "+soapPrimitiveResponse);
-                            finish();
+                            if(soapPrimitiveResponse.equals("Book is not availble for Lend"))
+                            {
+                           bookIS_();
+                            }
+                            else finish();
+
+                            Log.e("RequestBook", "Response: " + soapPrimitiveResponse);
+                           // finish();
                         }
                     });
+                    requestBook.wait();
                 } catch(Exception e){
                     Log.w("RequestBook","setThreadAction request EXCEPTION !!");
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "You are not connected to Internet", Toast.LENGTH_LONG).show();
                 }
+
             }
         };
     }
@@ -193,6 +211,22 @@ public class RequestBook extends Activity {
 
         adapter = new SingleBookAdapter(this, book, author, edition);
         list.setAdapter(adapter);
+    }
+    private void bookIS_() {
+
+        new AlertDialog.Builder(RequestBook.this)
+                .setTitle("Request Denied")
+                .setMessage("Another User has already Borrowed  this book")
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(true)
+                        dialog.cancel();
+                    }
+                })
+
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setCancelable(true).show();
     }
 
 }
