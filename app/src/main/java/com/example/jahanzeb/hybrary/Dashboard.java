@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +17,7 @@ public class Dashboard extends AppCompatActivity implements CustomDrawer.Navigat
 
     Activity me = this;
     String[] titles;
+    static int count;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -35,8 +35,7 @@ public class Dashboard extends AppCompatActivity implements CustomDrawer.Navigat
         setContentView(R.layout.activity_dashboard);
 
         titles = me.getResources().getStringArray(R.array.dashboard_items);
-        Log.d("Nawaz","Worked fine");
-        Log.d("NAWAZ","Array: "+titles.toString());
+
         myDrawer = (CustomDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -58,6 +57,7 @@ public class Dashboard extends AppCompatActivity implements CustomDrawer.Navigat
 
     public void onSectionAttached(int number) {
         mTitle = titles[number-1];
+        count = number;
     }
 
     public void restoreActionBar() {
@@ -124,7 +124,16 @@ public class Dashboard extends AppCompatActivity implements CustomDrawer.Navigat
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.dashboard, container, false);
+            Integer ActivityLayout = null;
+            switch (count){
+                case 1: ActivityLayout = R.layout.list_book; break;
+                case 2: ActivityLayout = R.layout.add_book; break;
+                case 3: ActivityLayout = R.layout.updatebook; break;
+                case 4: ActivityLayout = R.layout.activity_show_books; break;
+                case 5: ActivityLayout = R.layout.lendbookinfo; break;
+                case 6: ActivityLayout = R.layout.search_book; break;
+            }
+            View rootView = inflater.inflate(ActivityLayout, container, false);
             return rootView;
         }
 
