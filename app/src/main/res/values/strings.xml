@@ -4,9 +4,23 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_dashboard">Dashboard</string>
-    <string name="title_activity_show_books">ShowBooks</string>
-    <string name="title_activity_search_book">SearchBook</string>
-    <string name="title_activity_list_book">ListBook</string>
-    <string name="title_activity_add_book">AddBook</string>
-
+    <string name="title_activity_show_books">Show Books</string>
+    <string name="title_activity_search_book">Search Book</string>
+    <string name="title_activity_list_book">List Book</string>
+    <string name="title_activity_add_book">Add Book</string>
+    <string name="update_book">Update Book</string>
+    <string name="delete_book">Delete Book</string>
+    <string name="lend_book">Lend Book</string>
+    <string name="borrow_book">Borrow Book</string>
+    <string name="list_my_books">List My Books</string>
+    <string name="navigation_drawer_open">Open Drawer</string>
+    <string name="navigation_drawer_close">Close Drawer</string>
+    <string-array name="dashboard_items">
+        <item>@string/list_my_books</item>
+        <item>@string/title_activity_add_book</item>
+        <item>@string/update_book</item>
+        <item>@string/delete_book</item>
+        <item>@string/lend_book</item>
+        <item>@string/borrow_book</item>
+    </string-array>
 </resources>

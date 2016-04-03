@@ -21,7 +21,6 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class Signup extends AppCompatActivity {
 
@@ -52,7 +51,7 @@ public class Signup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
-        ButterKnife.bind(this);
+      /*  ButterKnife.bind(this);*/
         initializevariables();
 
 
@@ -125,13 +124,13 @@ public class Signup extends AppCompatActivity {
                                             Toast.makeText(getApplicationContext(), "something is went wrong,Try Again", Toast.LENGTH_LONG).show();
                                             Log.e("Signup", "not added::");
                                     }
-                                    else if (Validate() && out.equals("signupResponse{signupResult=Added; }")){
+                                    else if (/*Validate() && */out.equals("signupResponse{signupResult=Added; }")){
                                         Intent inntn= new Intent(getApplicationContext(),MainActivity.class);
                                         startActivity(inntn);
                                         finish();
                                         Log.e("Signup", "else condition::" + out);
                                     }
-                                    else if (Validate() && out.equals("signupResponse{signupResult=user exist:; }")){
+                                    else if (/*Validate() &&*/ out.equals("signupResponse{signupResult=user exist:; }")){
                                         Toast.makeText(getApplicationContext(), "user already exist", Toast.LENGTH_LONG).show();
                                         Log.e("Signup", "else condition::" + out);
                                     }
@@ -155,7 +154,7 @@ public class Signup extends AppCompatActivity {
         btnCreateProduct = (ImageView) findViewById(R.id.save);
 
     }
-    public boolean Validate() {
+   public boolean Validate() {
         boolean valid = true;
 
         if (p1.isEmpty() || p1.length() < 3) {
