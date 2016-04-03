@@ -132,6 +132,7 @@ public class Dashboard extends AppCompatActivity implements CustomDrawer.Navigat
                 case 4: ActivityLayout = R.layout.activity_show_books; break;
                 case 5: ActivityLayout = R.layout.lendbookinfo; break;
                 case 6: ActivityLayout = R.layout.search_book; break;
+                
             }
             View rootView = inflater.inflate(ActivityLayout, container, false);
             return rootView;

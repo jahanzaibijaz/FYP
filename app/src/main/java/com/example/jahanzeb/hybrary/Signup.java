@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -19,7 +20,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-/*import butterknife.ButterKnife;*/
+import butterknife.Bind;
 
 public class Signup extends AppCompatActivity {
 
@@ -31,14 +32,14 @@ public class Signup extends AppCompatActivity {
 
     ProgressDialog pd;
 
-   /* @Bind(R.id.username)
+    @Bind(R.id.username)
     TextView _username;
     @Bind(R.id.phone)
     TextView _phone;
     @Bind(R.id.password)
     TextView _password;
     @Bind(R.id.email)
-    TextView _email; */
+    TextView _email;
 
         private static final String NameSpace3 = "http://tempuri.org/";
         public static final String URL3 = "http://10.0.3.2:53611/WebService1.asmx";
@@ -119,7 +120,7 @@ public class Signup extends AppCompatActivity {
 
                                     if (out.equals("signupResponse{signupResult=none; }")) {
                                             Log.e("Signup", "if condition::" + out);
-                                            if(/*!Validate()*/ out.equals("signupResponse{signupResult=none; }"))
+                                            if(!Validate())
                                             Toast.makeText(getApplicationContext(), "something is went wrong,Try Again", Toast.LENGTH_LONG).show();
                                             Log.e("Signup", "not added::");
                                     }
@@ -153,7 +154,7 @@ public class Signup extends AppCompatActivity {
         btnCreateProduct = (ImageView) findViewById(R.id.save);
 
     }
-  /*  public boolean Validate() {
+   public boolean Validate() {
         boolean valid = true;
 
         if (p1.isEmpty() || p1.length() < 3) {
@@ -182,7 +183,7 @@ public class Signup extends AppCompatActivity {
             _email.setError(null);
         }
         return valid;
-    }*/
+    }
     public boolean Imageview_enabled()
     {
         boolean valid = false;

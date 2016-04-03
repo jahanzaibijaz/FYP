@@ -96,5 +96,6 @@
     <orderEntry type="library" exported="" name="support-v4-23.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.0.0" level="project" />
     <orderEntry type="module" module-name="ksoap2-android-assembly-2.6.0-jar-with-dependencies" exported="" />
+    <orderEntry type="module" module-name="butterknife-7.0.1" exported="" />
   </component>
 </module>
