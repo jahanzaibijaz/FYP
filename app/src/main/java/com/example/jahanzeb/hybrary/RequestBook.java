@@ -170,14 +170,13 @@ public class RequestBook extends Activity {
                     hnd.post(new Runnable() {
                         @Override
                         public void run() {
-                            if(soapPrimitiveResponse.equals("Book is not availble for Lend"))
-                            {
+                        if(soapPrimitiveResponse.equals("Book is not availble for Lend")) {
                            bookIS_();
-                            }
-                            else finish();
+                        }
+                        else finish();
 
-                            Log.e("RequestBook", "Response: " + soapPrimitiveResponse);
-                           // finish();
+                        Log.e("RequestBook", "Response: " + soapPrimitiveResponse);
+                       // finish();
                         }
                     });
                     requestBook.wait();
@@ -222,6 +221,7 @@ public class RequestBook extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         if(true)
                         dialog.cancel();
+                        finish();
                     }
                 })
 
