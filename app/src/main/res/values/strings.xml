@@ -8,5 +8,19 @@
     <string name="title_activity_search_book">SearchBook</string>
     <string name="title_activity_list_book">ListBook</string>
     <string name="title_activity_add_book">AddBook</string>
-
+    <string name="update_book">Update Book</string>
+    <string name="delete_book">Delete Book</string>
+    <string name="lend_book">Lend Book</string>
+    <string name="borrow_book">Borrow Book</string>
+    <string name="list_my_books">List My Books</string>
+    <string name="navigation_drawer_open">Open Drawer</string>
+    <string name="navigation_drawer_close">Close Drawer</string>
+    <string-array name="dashboard_items">
+        <item>@string/list_my_books</item>
+        <item>@string/title_activity_add_book</item>
+        <item>@string/update_book</item>
+        <item>@string/delete_book</item>
+        <item>@string/lend_book</item>
+        <item>@string/borrow_book</item>
+    </string-array>
 </resources>
