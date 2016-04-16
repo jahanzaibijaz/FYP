@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<group android:checkableBehavior="single">
+    <item
+
+        android:id="@+id/AddBook"
+        android:title="Add Book"
+        android:icon="@drawable/add_book"
+        />
+
+
+    <item
+
+        android:id="@+id/deleteBook"
+        android:title="Delete Book"
+        android:icon="@drawable/del_book"
+        />
+    </group>
+
+
+
+    <item android:title="Others">
+        <menu>
+            <item
+                android:title="Search Book"
+                android:id="@+id/searchBook"
+                android:icon="@drawable/request_book"
+                />
+
+            <item
+                android:title="BorrowBook"
+                android:id="@+id/BorrowBook"
+                android:icon="@drawable/lend_book"
+                />
+
+          </menu>
+    </item>
+</menu>

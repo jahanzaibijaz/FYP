@@ -161,11 +161,8 @@ public class RequestedBooks extends Activity {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "You are not connected to Internet", Toast.LENGTH_LONG).show();
                 }
-
             }
         };
-
-
         CancelRequest = new Thread(){
             public void run(){
                 try{
@@ -174,7 +171,6 @@ public class RequestedBooks extends Activity {
 
                     SoapObject request = new SoapObject(MainActivity.nameSpace, "cancelOwnrequest");
                     Log.e("RequestedBooks","Get Soap Request::"+request);
-
                     //info for borrower table_id
                     PropertyInfo table_id = new PropertyInfo();
                     table_id.setName("id");
@@ -195,7 +191,6 @@ public class RequestedBooks extends Activity {
                     Log.e("RequestedBooks", "request for android http transport call::" + envelop);
                     androidHttpTransport.call(MainActivity.SOAP_ACTION + "cancelOwnrequest", envelop); //TODO find issue..
                     Log.e("RequestedBooks", " http transport call::" + envelop);
-
                     final SoapPrimitive response = (SoapPrimitive)envelop.getResponse();
                     Log.e("RequestedBooks","response reached till soap primitive::");
                     soapPrimitiveResponse = response.toString();
@@ -222,7 +217,6 @@ public class RequestedBooks extends Activity {
         };
 
     }
-
     private void populateArrayLists() {
         Log.e("RequestedBooks","Response: "+soapPrimitiveResponse + "userId: "+MainActivity.userId);
         try {
