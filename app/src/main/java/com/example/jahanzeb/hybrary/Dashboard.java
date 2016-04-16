@@ -1,30 +1,29 @@
 package com.example.jahanzeb.hybrary;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Dashboard extends AppCompatActivity implements CustomDrawer.NavigationDrawerCallbacks {
+public class Dashboard extends AppCompatActivity implements CustomDrawer.NavigationDrawerCallbacks  {
 
     Activity me = this;
     String[] titles;
     static int count;
-
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private CustomDrawer myDrawer;
-
-    /**
+    /*
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
@@ -32,18 +31,20 @@ public class Dashboard extends AppCompatActivity implements CustomDrawer.Navigat
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("DashBoard", "onCreate");
         setContentView(R.layout.activity_dashboard);
-
-        titles = me.getResources().getStringArray(R.array.dashboard_items);
-
-        myDrawer = (CustomDrawer)
+        Log.e("DashBoard", "layout_set");
+       titles = me.getResources().getStringArray(R.array.dashboard_items);
+                 myDrawer = (CustomDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+       // myDrawer.
         mTitle = getTitle();
 
         // Set up the drawer.
         myDrawer.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        Log.e("DashBoard", "drawer_creation_completed")  ;
     }
 
     @Override
@@ -51,10 +52,10 @@ public class Dashboard extends AppCompatActivity implements CustomDrawer.Navigat
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container,PlaceholderFragment.newInstance(position+1))
                 .commit();
     }
-
+  //  ,PlaceholderFragment.newInstance(position + 1)
     public void onSectionAttached(int number) {
         mTitle = titles[number-1];
         count = number;
@@ -99,54 +100,54 @@ public class Dashboard extends AppCompatActivity implements CustomDrawer.Navigat
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+       public static class PlaceholderFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private int ActivityLayout;
 
         /**
          * Returns a new instance of this fragment for the given section
          * number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
+        PlaceholderFragment fragment = new PlaceholderFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        fragment.setArguments(args);
+        return fragment;
+     }
 
-        public PlaceholderFragment() {
-        }
+    public PlaceholderFragment() {
+       }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            Integer ActivityLayout = null;
-            switch (count){
-                case 1: ActivityLayout = R.layout.list_book; break;
-                case 2: ActivityLayout = R.layout.add_book; break;
-                case 3: ActivityLayout = R.layout.updatebook; break;
-                case 4: ActivityLayout = R.layout.activity_show_books; break;
-                case 5: ActivityLayout = R.layout.lendbookinfo; break;
-                case 6: ActivityLayout = R.layout.search_book; break;
-                
-            }
-            View rootView = inflater.inflate(ActivityLayout, container, false);
-            return rootView;
-        }
+          @Override
+         public View onCreateView(LayoutInflater inflater, ViewGroup container,
+         Bundle savedInstanceState) {
+         switch (count){
+           case 1: ActivityLayout = R.layout.list_book; break;
+           case 2: ActivityLayout = R.layout.add_book; break;
+           case 3: ActivityLayout = R.layout.updatebook; break;
+           case 4: ActivityLayout = R.layout.activity_show_books; break;
+           case 5: ActivityLayout = R.layout.lendbookinfo; break;
+           case 6: ActivityLayout = R.layout.search_book; break;
 
-        @Override
-        public void onAttach(Activity activity) {
+         }
+           View rootView = inflater.inflate(ActivityLayout, container, false);
+             return rootView;
+           }
+                 @Override
+         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            ((Dashboard) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
+           ((Dashboard) activity).onSectionAttached(
+                   getArguments().getInt(ARG_SECTION_NUMBER));
+          }
         }
+
     }
 
-}
 //    GridView grid;
 //    Integer[] icons = {
 //            R.drawable.add_book,

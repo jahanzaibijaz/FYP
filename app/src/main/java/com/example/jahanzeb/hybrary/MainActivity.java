@@ -72,6 +72,12 @@ public class MainActivity extends Activity {
                 startActivity(intnt);
             }
         });
+
+        /* Delete ME
+        userName.setText("jahanzaib");
+        password.setText("12345");
+        setThreadAction();
+        checkSignInDetails.start(); */
     }
 
     private void initializeVariables() {

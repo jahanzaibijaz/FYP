@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="navigation_background">#ffd27f</color>
+    <color name="color_primary">#2196F3</color>
+    <color name="color_primary_dark">#1976D2</color>
+    <color name="accent_color">#c2110e</color>
+    <color name="black_color">#000000</color>
+</resources>
