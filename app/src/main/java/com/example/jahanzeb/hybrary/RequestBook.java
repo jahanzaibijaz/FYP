@@ -2,6 +2,7 @@ package com.example.jahanzeb.hybrary;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -49,27 +50,35 @@ public class RequestBook extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long lid) {
 
                 new AlertDialog.Builder(RequestBook.this)
-                    .setTitle("Confirm...")
-                    .setMessage("Send request to Hybrary for Borrowing '" + book.get(position) + "'")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (requestBook.getThreadGroup() != null)
-                            {
-                                requestBook.getThreadGroup().interrupt();
+                        .setTitle("Confirm...")
+                        .setMessage("Send request to Hybrary for Borrowing '" + book.get(position) + "'")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (requestBook.getThreadGroup() != null) {
+                                    requestBook.getThreadGroup().interrupt();
+                                }
+                                BookID = Integer.parseInt(id.get(position));
+                                requestBook.start();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
 
                             }
-
-                            BookID = Integer.parseInt(id.get(position));
-                            requestBook.start();
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
                         .setCancelable(true).show();
+            }
+        });
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                //  Code incomplete
+                Dialog listDialog = new Dialog(RequestBook.this);
+                listDialog.setContentView(R.layout.comments_list);
+                listDialog.show();
+                return true;
             }
         });
 

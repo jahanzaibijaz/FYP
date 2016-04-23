@@ -85,49 +85,30 @@ public class ShowBooks extends Activity {
                             pi.setType(String.class);
                             request.addProperty(pi);
                             //tbledata=TV.getText().toString();
-                       //     tableRow.getPropertyInfo(0,pi);
-                         //   Log.d("YESS",pi.getName()+"/"+tableRow.getProperty(0).toString());
-
-
+                            //tableRow.getPropertyInfo(0,pi);
+                           //Log.d("YESS",pi.getName()+"/"+tableRow.getProperty(0).toString());
                             request.addProperty(pi);
-
-
                             SoapSerializationEnvelope envelop = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 
                             envelop.dotNet = true;
                             envelop.setOutputSoapObject(request);
                             HttpTransportSE androidHttpTransport = new HttpTransportSE(URL3);
-
                             androidHttpTransport.call(SOAP_Action3, envelop);
                             // SoapPrimitive response = (SoapPrimitive) envelop.getResponse();
-
                             SoapPrimitive result = (SoapPrimitive) envelop.getResponse();
-
-
-
-
                          // result = (SoapPrimitive) result;
-                      //   table = (SoapObject) result.getProperty(0);
+                         // table = (SoapObject) result.getProperty(0);
                           // final String res = result.getProperty(0);
-//
-                       //   tableRow = (SoapObject) result.getProperty(0);
-
-                           //SoapObject S_deal=(SoapObject)tableRow.getProperty(0);
-
-
-
+                        //tableRow = (SoapObject) result.getProperty(0);
+                        // SoapObject S_deal=(SoapObject)tableRow.getProperty(0);
                          Result = result.toString();
                            // Result=result.toString();Result=result.toString();
                           final  String [] Trim=Result.split("/");
-                             // OutPut1 = response.toString();
-
-                            // OutPut1 = response.toString();
-                        // final String[] Trim1 = Result.split("BookName");
-
-
-                         //   Pattern p = Pattern.compile("\\d{2}(am|pm)");
-                     //     final  Matcher m = p.matcher("go to the shop at 12pm");
-
+                          // OutPut1 = response.toString();
+                          // OutPut1 = response.toString();
+                          // final String[] Trim1 = Result.split("BookName");
+                          //   Pattern p = Pattern.compile("\\d{2}(am|pm)");
+                          //     final  Matcher m = p.matcher("go to the shop at 12pm");
                             hnd.post(new Runnable() {
 
                                 @Override
@@ -138,9 +119,6 @@ public class ShowBooks extends Activity {
                                   //      TV.setText(Result);
 
                                          TV.setText("BookName :"+Trim[0]+ "\n" + "Author :"+Trim[1] + "\n" + "Edition :" + Trim[2]);
-
-
-
                                     }
                                   catch ( Exception e)
                                   {
@@ -148,8 +126,6 @@ public class ShowBooks extends Activity {
                                   }
 
                                     //TV.setText(Result);
-
-
 /*
                                    /* ArrayList<Book> booklist= new ArrayList<Book>();
 
