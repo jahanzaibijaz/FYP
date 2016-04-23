@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/Borrower_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HELLO_WORLD"
+        android:padding="20dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/background_dark"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:ems="10"/>
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBar"
+        android:layout_margin="20dp"
+        android:layout_gravity="center_horizontal"
+        android:rating="7"/>
+    <EditText
+        android:id="@+id/ET_comments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:inputType="none"
+        android:background="@null"
+        android:editable="false"
+        android:layout_marginBottom="20dp"
+        android:maxHeight="150dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="20dp"
+        android:background="#000000"/>
+</LinearLayout>

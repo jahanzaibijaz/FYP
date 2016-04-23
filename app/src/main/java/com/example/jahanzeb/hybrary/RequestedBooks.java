@@ -2,6 +2,7 @@ package com.example.jahanzeb.hybrary;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,7 +51,33 @@ public class RequestedBooks extends Activity {
                 return true;
             }
         });
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                //  Code incomplete
+                showFeedBackDialog(Integer.parseInt(bookid.get(position)));
+                return true;
+            }
+        });
     }
+
+    private void showFeedBackDialog(int bookId) {
+        final Dialog listDialog = new Dialog(RequestedBooks.this);
+        listDialog.setContentView(R.layout.comments_list);
+        final ListView feedbacks = (ListView)listDialog.findViewById(R.id.comments__List);
+
+        API.RetrieveBookReviewsCallback bookReviews = new API.RetrieveBookReviewsCallback() {
+            @Override
+            public void onSuccess(Feedback_Adapter adapter) {
+                feedbacks.setAdapter(adapter);
+                listDialog.show();
+            }
+        };
+
+        API apiCall = new API();
+        apiCall.RetrieveBookReviews(RequestedBooks.this, bookId, bookReviews);
+    }
+
     private void initializeVariables() {
         setThreadAction();
         getOwnersBooks.start();
@@ -230,7 +257,7 @@ public class RequestedBooks extends Activity {
             int num = jArray.length();
             for (int i = 0; i < jArray.length(); i++) {
                 JSONObject json = jArray.getJSONObject(i);
-                bookid.add(json.getString("id"));
+                bookid.add(json.getString("bookid"));
                 book.add(json.getString("book"));
                 author.add(json.getString("author"));
                 edition.add(json.getString("edition"));
