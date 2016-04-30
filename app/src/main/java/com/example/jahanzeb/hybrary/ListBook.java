@@ -25,6 +25,7 @@ public class ListBook extends Activity {
             soapPrimitiveResponse,
             SOAP_ACTION_METHOD = MainActivity.SOAP_ACTION + methodName;
 
+
     private Thread getOwnersBooks;
     ListView list;
     ArrayList<String> id,book,author,edition;

@@ -112,7 +112,6 @@ public class AddBook extends Activity {
 
                             populateArrayLists();
                             Log.e("AddBook","BookAddMethod"+soapPrimitiveResponse);
-
                         }
                     });
                 } catch(Exception e){
@@ -124,8 +123,8 @@ public class AddBook extends Activity {
             }
         };
     }
+
     private void populateArrayLists() {
         Log.e("AddBook","Response: "+soapPrimitiveResponse);
     }
-
 }

@@ -56,12 +56,15 @@ public class LendBook extends Activity {
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                respondRequest(position);
+                if(!InAcceptState(position))
+                    respondRequest(position);
                 return true;
-
             }
         });
+    }
 
+    private boolean InAcceptState(int index) {
+        return response.get(index).equals("Accept");
     }
 
     private void respondRequest(final int position) {
