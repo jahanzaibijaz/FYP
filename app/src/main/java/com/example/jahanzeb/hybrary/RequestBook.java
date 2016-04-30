@@ -70,7 +70,7 @@ public class RequestBook extends Activity {
                         .setCancelable(true).show();
             }
         });
-
+/*
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -80,7 +80,7 @@ public class RequestBook extends Activity {
                 listDialog.show();
                 return true;
             }
-        });
+        });*/
 
     }
 
@@ -94,6 +94,7 @@ public class RequestBook extends Activity {
 
         list = (ListView)findViewById(R.id.bookList);
     }
+
 
     private void setThreadAction() {
         final Handler hnd = new Handler();
@@ -194,13 +195,12 @@ public class RequestBook extends Activity {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "You are not connected to Internet", Toast.LENGTH_LONG).show();
                 }
-
             }
         };
     }
 
     private void populateArrayLists() {
-        Log.e("ListBook","Response: "+soapPrimitiveResponse + "userId: "+MainActivity.userId);
+        Log.e("RequestBook","Response: "+soapPrimitiveResponse + "userId: "+MainActivity.userId);
         try {
             JSONArray jArray = new JSONArray(soapPrimitiveResponse);
             int num = jArray.length();
@@ -213,13 +213,14 @@ public class RequestBook extends Activity {
             }
         } catch (Exception e) {
             // TODO: handle exception
-            Log.e("ListBook","populateArrayList EXCEPTION !!");
+            Log.e("RequestBook","populateArrayList EXCEPTION !!");
             e.printStackTrace();
         }
 
         adapter = new SingleBookAdapter(this, book, author, edition);
         list.setAdapter(adapter);
     }
+
     private void bookIS_() {
 
         new AlertDialog.Builder(RequestBook.this)
@@ -233,10 +234,8 @@ public class RequestBook extends Activity {
                         finish();
                     }
                 })
-
                 .setIcon(android.R.drawable.ic_dialog_info)
                 .setCancelable(true).show();
     }
-
 }
 
